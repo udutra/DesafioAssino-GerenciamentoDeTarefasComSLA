@@ -1,4 +1,7 @@
 <Solution>
+  <Folder Name="/Tests/">
+    <Project Path="backend/tests/DesafioAssino.Domain.Tests/DesafioAssino.Domain.Tests.csproj" />
+  </Folder>
   <Project Path="backend/src/DesafioAssino.Api/DesafioAssino.Api.csproj" />
   <Project Path="backend/src/DesafioAssino.Domain/DesafioAssino.Domain.csproj" />
 </Solution>
