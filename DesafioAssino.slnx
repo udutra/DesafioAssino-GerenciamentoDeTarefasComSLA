@@ -6,6 +6,7 @@
   <Folder Name="/Tests/">
     <Project Path="backend/tests/DesafioAssino.Application.Tests/DesafioAssino.Application.Tests.csproj" />
     <Project Path="backend/tests/DesafioAssino.Domain.Tests/DesafioAssino.Domain.Tests.csproj" />
+    <Project Path="DesafioAssino.Integration.Tests/DesafioAssino.Integration.Tests.csproj" />
   </Folder>
   <Project Path="backend/src/DesafioAssino.Api/DesafioAssino.Api.csproj" />
   <Project Path="backend/src/DesafioAssino.Application/DesafioAssino.Application.csproj" />

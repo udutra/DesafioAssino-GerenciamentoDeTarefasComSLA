@@ -31,7 +31,7 @@ Uma startup deseja lançar um sistema de gerenciamento de tarefas com SLA. Seu o
 
 ## 🏗️ Arquitetura Utilizada
 
-O projeto foi desenvolvido seguindo rigorosamente os princípios da **Clean Architecture** (Arquitetura Limpa) e **DDD Light** (Domain-Driven Design simplificado) no Backend.
+O projeto foi desenvolvido seguindo rigorosamente os princípios da **Clean Architecture** (Arquitetura Limpa) e **DDD Light** (Domain-Driven Design simplificado).
 
 ### Backend (.NET 10)
 A solução foi dividida em camadas concêntricas para garantir a separação de responsabilidades, testabilidade e independência de frameworks:
@@ -59,6 +59,7 @@ A solução foi dividida em camadas concêntricas para garantir a separação de
 
 *   **Modular Architecture**: Optou-se pelo uso de NgModules (em vez de Standalone Components puros) para melhor organização e separação de responsabilidades, facilitando a escalabilidade e a manutenção por desenvolvedores familiarizados com padrões corporativos.
 *   **Component-Based**: Separação clara entre lógica (.ts), visual (.html) e estilo (.scss).
+
 ---
 
 ## 🧩 Design Patterns
@@ -79,7 +80,7 @@ Os seguintes padrões de projeto foram aplicados para resolver problemas comuns 
 
 *   **Strategy / Adapter (implícito)**:
     *   Na implementação do `IFileStorageService`, permitindo facilmente trocar o armazenamento local por S3 ou Azure Blob Storage no futuro.
-  
+
 * **DTO (Data Transfer Object)**:
     *   Utilizado para separar o modelo de domínio do modelo de apresentação. Exemplo: (`CriarTarefaForm`) para receber dados complexos com arquivos via multipart/form-data e (`TarefaResponse`) para formatar a saída para o cliente.
 
@@ -93,8 +94,8 @@ Os seguintes padrões de projeto foram aplicados para resolver problemas comuns 
 Abaixo, as principais bibliotecas externas e a motivação para sua escolha:
 
 ### Backend
-*   **Entity Framework Core 10 (SQL Server & SQLite)**:
-    *   *Motivação:* ORM robusto que aumenta a produtividade, protege contra SQL Injection e facilita a troca de bancos de dados (usamos SQLite In-Memory para testes de integração).
+*   **Entity Framework Core 10 (SQL Server)**:
+    *   *Motivação:* ORM robusto que aumenta a produtividade e protege contra SQL Injection.
 *   **FluentValidation**:
     *   *Motivação:* Separa as regras de validação das entidades e DTOs, permitindo validações complexas e encadeadas de forma legível e testável.
 *   **Swashbuckle (Swagger)**:
@@ -117,8 +118,8 @@ Abaixo, as principais bibliotecas externas e a motivação para sua escolha:
 
 Durante o desenvolvimento, os pontos de maior complexidade e aprendizado foram:
 
-1.  **Testes de Integração com Banco Relacional (SQLite In-Memory)**:
-    *   Configurar o ambiente de teste para substituir o SQL Server pelo SQLite In-Memory sem conflitos de injeção de dependência foi desafiador. Foi necessário criar uma `CustomWebApplicationFactory` robusta para gerenciar o ciclo de vida da conexão e garantir o isolamento entre testes.
+1.  **Testes de Integração com Banco Real (SQL Server)**:
+    *   Optou-se por utilizar um banco de dados SQL Server dedicado para os testes de integração. Essa decisão foi tomada para garantir total fidelidade às queries e comportamentos do banco de produção, superando limitações e complexidades de configuração encontradas ao tentar emular o ambiente com bancos em memória (como diferenças em funções de data e tratamento de conexões).
 
 2.  **Gerenciamento de Upload de Arquivos (Multipart/Form-Data)**:
     *   Integrar o recebimento de arquivos via `IFormFile` na API mantendo a arquitetura limpa (sem sujar a camada de Application com dependências HTTP) exigiu a criação de ViewModels específicos (`CriarTarefaForm`) na camada de API.
@@ -133,19 +134,53 @@ Durante o desenvolvimento, os pontos de maior complexidade e aprendizado foram:
 ### Pré-requisitos
 *   .NET 10 SDK
 *   Node.js
-*   SQL Server
+*   SQL Server LocalDB (ou configure a connection string para seu ambiente)
 
 ### Backend
+#### Passos
 1.  Navegue até a pasta `backend/src/DesafioAssino.Api`.
-2.  Configure a string de conexão no `appsettings.json` (ou use o padrão local).
-3.  Execute as migrações (se houver) ou deixe o `EnsureCreated` rodar.
-4.  Execute:
     ```bash
+    cd backend/src/DesafioAssino.Api
+    ```
+2.  Configure a string de conexão no `appsettings.json` (ou como no projeto atual com .NET User Secrets).
+    ```bash
+    dotnet user-secrets set "ConnectionStrings:DefaultConnection" "Server=localhost,1433;Database=DesafioAssino_Teste;User Id=sa;Password=YourStrong!Pass;TrustServerCertificate=True;"
+    ```
+3.  Execute as migrações (backend/testes):
+    ```bash
+    dotnet ef migrations add Initial `
+    --project backend\src\DesafioAssino.Infrastructure\DesafioAssino.Infrastructure.csproj `
+    --startup-project backend\src\DesafioAssino.Api\DesafioAssino.Api.csproj `
+    --context DesafioAssino.Infrastructure.Persistence.AppDbContext `
+    --configuration Release `
+    --output-dir Persistence\Migrations  
+    ```
+
+    ```bash
+    dotnet ef database update `
+    --project backend\src\DesafioAssino.Infrastructure\DesafioAssino.Infrastructure.csproj `
+    --startup-project backend\src\DesafioAssino.Api\DesafioAssino.Api.csproj `
+    --context DesafioAssino.Infrastructure.Persistence.AppDbContext `
+    --configuration Release
+    ```
+
+    ```bash
+    dotnet ef database update `
+    --project backend/src/DesafioAssino.Infrastructure/DesafioAssino.Infrastructure.csproj `
+    --startup-project backend/src/DesafioAssino.Api/DesafioAssino.Api.csproj `
+    --context DesafioAssino.Infrastructure.Persistence.AppDbContext `
+    --connection "Server=localhost,1433;Database=DesafioAssino_Teste;User Id={user};Password={password};TrustServerCertificate=True;" `
+    --configuration Release
+    ```
+4.  Execute o comando para restaurar dependências e rodar:
+    ```bash
+    dotnet build
     dotnet run
     ```
-5.  Acesse o Swagger em: `https://localhost:7200/index.html`.
+5.  Acesse o Swagger em: `https://localhost:7200/index.html` (ou a porta indicada no console).
 
 ### Frontend
+#### Passos
 1.  Navegue até a pasta `frontend/`.
 2.  Instale as dependências com:
     ```bash
@@ -157,8 +192,8 @@ Durante o desenvolvimento, os pontos de maior complexidade e aprendizado foram:
     ```
 4.  Acesse `http://localhost:4200/tarefas` no seu navegador
 
-### Testes
-Para rodar a suíte completa de testes (Unitários e Integração):
+### Rodando os Testes
+Para executar a suíte completa de testes (Unitários e Integração):
 ```bash
 dotnet test
 ```

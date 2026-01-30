@@ -26,8 +26,17 @@ export class TarefaListComponent implements OnInit {
   carregar() {
     this.service.listar().subscribe({
       next: (dados) => {
-        this.dataSource = dados;
-        this.cdr.detectChanges();
+        this.dataSource = dados.map(item => {
+          if (item.dataCriacao && !item.dataCriacao.endsWith('Z')) {
+            item.dataCriacao += 'Z';
+          }
+          if (item.dataExpiracao && !item.dataExpiracao.endsWith('Z')) {
+            item.dataExpiracao += 'Z';
+          }
+          return item;
+        });
+
+        this.cdr.detectChanges(); // Atualiza a tela
       },
       error: (e) => console.error(e)
     });
@@ -49,13 +58,12 @@ export class TarefaListComponent implements OnInit {
 
   isExpirada(t: TarefaResponse): boolean {
     const status = t.status.toString();
-
     if (status === 'Concluida' || status === '2') return false;
-
     if (status === 'Expirada' || status === '3') return true;
 
     const criacao = new Date(t.dataCriacao);
-    const limite = new Date(criacao.getTime() + (t.slaHoras * 60 * 60 * 1000))
+    const limite = new Date(criacao.getTime() + (t.slaHoras * 60 * 60 * 1000));
+
     return new Date() > limite;
   }
 
@@ -81,7 +89,6 @@ export class TarefaListComponent implements OnInit {
     const fim = new Date(t.dataExpiracao).getTime();
 
     const diff = fim - inicio;
-
     const horas = Math.round(diff / (1000 * 60 * 60));
 
     return horas.toString();
