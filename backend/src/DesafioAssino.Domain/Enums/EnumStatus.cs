@@ -1,4 +1,4 @@
-namespace DesafioAssino.Domain;
+namespace DesafioAssino.Domain.Enums;
 
 public enum EnumStatus{
     Pendente = 1,

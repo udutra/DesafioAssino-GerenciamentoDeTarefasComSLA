@@ -1,4 +1,5 @@
 using DesafioAssino.Domain.Entities;
+using DesafioAssino.Domain.Enums;
 using DesafioAssino.Domain.Exceptions;
 using FluentAssertions;
 

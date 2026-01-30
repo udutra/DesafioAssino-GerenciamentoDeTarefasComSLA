@@ -1,9 +1,10 @@
+using DesafioAssino.Domain.Enums;
 using DesafioAssino.Domain.Exceptions;
 
 namespace DesafioAssino.Domain.Entities;
 
 public class TarefaItem{
-    public Guid Id { get; private set; } = Guid.CreateVersion7();
+    public Guid Id { get; private set; }
     public int NumTarefa { get; private set; }
     public string Titulo { get; private set; }
     public int SlaHoras { get; private set; }
@@ -13,8 +14,7 @@ public class TarefaItem{
     public EnumStatus Status { get; private set; }
     public DateTime DataExpiracao => DataCriacao.AddHours(SlaHoras);
 
-    public TarefaItem(string titulo, int slaHoras, string arquivoPath)
-    {
+    public TarefaItem(string titulo, int slaHoras, string arquivoPath){
         if (string.IsNullOrWhiteSpace(titulo))
             throw new DomainException("Título é obrigatório.");
 

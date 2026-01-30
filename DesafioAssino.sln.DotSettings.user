@@ -1,6 +1,7 @@
 ﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=9c81de8e_002D94c0_002D41ad_002Dbb8f_002Dcc43a5667898/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="Deve_identificar_tarefa_expirada" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
-  &lt;TestAncestor&gt;&#xD;
-    &lt;TestId&gt;xUnit::E92BEE85-8DED-C85D-2575-AD178799BF29::net10.0::DesafioAssino.Domain.Tests.Entities.TarefaItemTests&lt;/TestId&gt;&#xD;
-  &lt;/TestAncestor&gt;&#xD;
-&lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>
+	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=7020124F_002D9FFC_002D4AC3_002D8F3D_002DAAB8E0240759_002Ff_003AExceptionDispatchInfo_002Ecs_002Fl_003AC_0021_003FUsers_003FGuilherme_003FAppData_003FRoaming_003FJetBrains_003FRider2025_002E3_003Fresharper_002Dhost_003FDecompilerCache_003Fdecompiler_003Fc9edfa3590b94021aa605bb7035fdb06f48910_003F20_003F2374c98b_003FExceptionDispatchInfo_002Ecs/@EntryIndexedValue">ForceIncluded</s:String>
+	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=7020124F_002D9FFC_002D4AC3_002D8F3D_002DAAB8E0240759_002Ff_003AStateManager_002Ecs_002Fl_003AC_0021_003FUsers_003FGuilherme_003FAppData_003FRoaming_003FJetBrains_003FRider2025_002E3_003Fresharper_002Dhost_003FSourcesCache_003Fe6d88dae8614a065821a61238d68e191b9a32334bd34ae19e47ac82e203532_003FStateManager_002Ecs/@EntryIndexedValue">ForceIncluded</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=0d8bb1c5_002D8f02_002D44f0_002Db36e_002D1696dde936cd/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="All tests from Solution" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;Solution /&gt;&#xD;
+&lt;/SessionState&gt;</s:String>
+	</wpf:ResourceDictionary>
