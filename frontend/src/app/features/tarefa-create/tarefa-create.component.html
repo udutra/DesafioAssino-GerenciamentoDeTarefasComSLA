@@ -1,0 +1,33 @@
+<div class="container">
+  <mat-card class="card-form">
+    <mat-card-header>
+      <mat-card-title>Nova Tarefa</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+      <div class="form-grid">
+        <mat-form-field appearance="outline">
+          <mat-label>Título</mat-label>
+          <input matInput [(ngModel)]="titulo" [disabled]="enviando">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>SLA (Horas)</mat-label>
+          <input matInput type="number" [(ngModel)]="slaHoras" min="1" [disabled]="enviando">
+        </mat-form-field>
+
+        <div class="upload-area">
+          <label>Anexar Arquivo (Obrigatório):</label>
+          <input type="file" (change)="onFileChange($event)" [disabled]="enviando">
+        </div>
+      </div>
+    </mat-card-content>
+
+    <mat-card-actions align="end">
+      <button mat-button routerLink="/tarefas" [disabled]="enviando">Cancelar</button>
+      <button mat-raised-button color="primary" (click)="salvar()" [disabled]="enviando">
+        {{ enviando ? 'Enviando...' : 'Salvar Tarefa' }}
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</div>

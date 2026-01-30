@@ -5,8 +5,9 @@ namespace DesafioAssino.Application.Services;
 
 public sealed class ConcluirTarefaService(ITarefaRepository tarefaRepository) : IConcluirTarefaService{
 
-    public async Task ExecutarAsync(Guid tarefaId, CancellationToken cancellationToken){
-        var tarefa = await tarefaRepository.ObterPorIdAsync(tarefaId, cancellationToken);
+    public async Task ExecutarAsync(int numTarefa, CancellationToken cancellationToken){
+
+        var tarefa = await tarefaRepository.ObterPorNumTarefaAsync(numTarefa, cancellationToken);
 
         if (tarefa is null)
             throw new DomainException("Tarefa não encontrada.");

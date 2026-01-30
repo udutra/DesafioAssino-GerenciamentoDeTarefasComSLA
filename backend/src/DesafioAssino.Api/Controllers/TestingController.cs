@@ -1,7 +1,6 @@
 using DesafioAssino.Application.Interfaces;
 using DesafioAssino.Infrastructure.Persistence;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace DesafioAssino.Api.Controllers;
 

@@ -1,6 +1,5 @@
 using DesafioAssino.Application.DTOs;
 using DesafioAssino.Application.Interfaces;
-using DesafioAssino.Domain;
 using DesafioAssino.Domain.Enums;
 
 namespace DesafioAssino.Application.Services;

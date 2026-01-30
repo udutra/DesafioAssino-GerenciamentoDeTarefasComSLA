@@ -1,5 +1,4 @@
 using DesafioAssino.Application.Interfaces;
-using DesafioAssino.Domain;
 using DesafioAssino.Domain.Entities;
 using DesafioAssino.Domain.Enums;
 using DesafioAssino.Infrastructure.Persistence;

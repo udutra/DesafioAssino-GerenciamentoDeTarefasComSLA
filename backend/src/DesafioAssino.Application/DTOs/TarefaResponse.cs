@@ -1,4 +1,3 @@
-using DesafioAssino.Domain;
 using DesafioAssino.Domain.Enums;
 
 namespace DesafioAssino.Application.DTOs;

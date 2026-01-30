@@ -5,8 +5,10 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace DesafioAssino.Infrastructure.Persistence.Migrations
 {
+    /// <inheritdoc />
     public partial class Initial : Migration
     {
+        /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
@@ -29,22 +31,18 @@ namespace DesafioAssino.Infrastructure.Persistence.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Tarefas_DataCriacao",
-                table: "Tarefas",
-                column: "DataCriacao");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Tarefas_NumTarefa",
                 table: "Tarefas",
                 column: "NumTarefa",
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Tarefas_Status",
+                name: "IX_Tarefas_Status_DataCriacao",
                 table: "Tarefas",
-                column: "Status");
+                columns: new[] { "Status", "DataCriacao" });
         }
 
+        /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(

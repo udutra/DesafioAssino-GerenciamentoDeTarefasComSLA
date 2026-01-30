@@ -40,7 +40,7 @@ public class TarefasController(ICriarTarefaService criarTarefaService, IListarTa
     [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> Criar([FromForm] CriarTarefaForm form, CancellationToken cancellationToken)
     {
-        if (form.Arquivo == null || form.Arquivo.Length == 0)
+        if (form.Arquivo.Length == 0)
             return BadRequest(new ErrorResponse { Message = "Arquivo é obrigatório." });
 
         using var memoryStream = new MemoryStream();
@@ -90,19 +90,19 @@ public class TarefasController(ICriarTarefaService criarTarefaService, IListarTa
     /// <summary>
     /// Conclui uma tarefa existente.
     /// </summary>
-    /// <param name="id">ID da tarefa.</param>
+    /// <param name="numTarefa">Número da tarefa.</param>
     /// <param name="cancellationToken">Token de cancelamento.</param>
     /// <returns>Sem conteúdo.</returns>
     /// <response code="204">Tarefa concluída com sucesso.</response>
     /// <response code="404">Tarefa não encontrada.</response>
     /// <response code="400">Não é possível concluir tarefa expirada.</response>
-    [HttpPut("{id:guid}/concluir")]
+    [HttpPut("{numTarefa:int}/concluir")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status404NotFound)]
     [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status400BadRequest)]
-    public async Task<IActionResult> Concluir(Guid id, CancellationToken cancellationToken)
+    public async Task<IActionResult> Concluir(int numTarefa, CancellationToken cancellationToken)
     {
-        await concluirTarefaService.ExecutarAsync(id, cancellationToken);
+        await concluirTarefaService.ExecutarAsync(numTarefa, cancellationToken);
         return NoContent();
     }
 }

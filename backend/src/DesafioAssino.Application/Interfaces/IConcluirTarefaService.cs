@@ -1,5 +1,5 @@
 namespace DesafioAssino.Application.Interfaces;
 
 public interface IConcluirTarefaService{
-    Task ExecutarAsync(Guid tarefaId, CancellationToken cancellationToken);
+    Task ExecutarAsync(int numTarefa, CancellationToken cancellationToken);
 }

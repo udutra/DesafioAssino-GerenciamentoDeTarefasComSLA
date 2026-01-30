@@ -50,7 +50,7 @@ public class ObterPendentesServiceTests
     public async Task Deve_lancar_excecao_se_repositorio_retornar_null(){
         _repositoryMock
             .Setup(r => r.ObterPendentesAsync(It.IsAny<CancellationToken>()))
-            .ReturnsAsync((List<TarefaItem>?)null);
+            .ReturnsAsync(((List<TarefaItem>?)null)!);
 
         var service = new ObterPendentesService(_repositoryMock.Object);
 
